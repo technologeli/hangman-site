@@ -16,5 +16,5 @@ export interface EndGame {
 }
 
 export interface SetGameProps {
-  setGame: React.Dispatch<React.SetStateAction<Game | EndGame | undefined>>
+  setGame: React.Dispatch<React.SetStateAction<Game | EndGame | undefined>>;
 }

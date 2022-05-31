@@ -5,21 +5,26 @@ import { getGame } from "./lib/api";
 import { SetGameProps } from "./lib/game";
 
 function Join({ setGame }: SetGameProps) {
-  const [id, setId] = useState('')
+  const [id, setId] = useState("");
   return (
     <>
       <TextInput
         value={id}
-        onChange={e => setId(e.currentTarget.value)}
+        onChange={(e) => setId(e.currentTarget.value)}
         placeholder="ID"
         label="ID"
-        variant='filled'
+        variant="filled"
         required
       />
-      <Space h='md' />
-      <Button disabled={!id} onClick={() => {
-        // getGame(id).then(g => setGame(g))
-      }}>Join Game</Button>
+      <Space h="md" />
+      <Button
+        disabled={!id}
+        onClick={() => {
+          // getGame(id).then(g => setGame(g))
+        }}
+      >
+        Join Game
+      </Button>
     </>
   );
 }

@@ -8,10 +8,10 @@ const toGame = (data: any) => {
     lives: data.lives,
     letterGuesses: data.letter_guesses,
     phraseGuesses: data.phrase_guesses,
-    current: data.current
+    current: data.current,
   };
   return g;
-}
+};
 
 const toEndGame = (data: any) => {
   const eg: EndGame = {
@@ -20,34 +20,32 @@ const toEndGame = (data: any) => {
     letterGuesses: data.letter_guesses,
     phraseGuesses: data.phrase_guesses,
     answer: data.answer,
-    status: data.status
-  }
+    status: data.status,
+  };
   return eg;
-}
+};
 
 export const createGame = async (answer: string) => {
   const res = await fetch(`${apiURL}/create?answer=${answer}`);
   const data = await res.json();
   return toGame(data);
-}
+};
 
 export const getGame = async (id: string) => {
   const res = await fetch(`${apiURL}/game/${id}`);
   const data = await res.json();
   return toGame(data);
-}
+};
 
 export const playGame = async (id: string, guess: string) => {
-  const res = await fetch(`${apiURL}/play`,
-    {
-      method: "Post",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, guess })
-    }
-  );
+  const res = await fetch(`${apiURL}/play`, {
+    method: "Post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, guess }),
+  });
   const data = await res.json();
   if (data.status) {
-    return toEndGame(data)
+    return toEndGame(data);
   }
   return toGame(data);
-}
+};
