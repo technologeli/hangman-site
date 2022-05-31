@@ -1,5 +1,9 @@
 import { EndGame, Game } from "./game";
 
+export interface err {
+  message: string;
+}
+
 const apiURL = "http://localhost:3001";
 
 const toGame = (data: any) => {
@@ -31,19 +35,32 @@ export const createGame = async (answer: string) => {
   return toGame(data);
 };
 
-export const getGame = async (id: string) => {
+export const getGame = async (id: string): Promise<Game | err> => {
   const res = await fetch(`${apiURL}/game/${id}`);
   const data = await res.json();
+
+  if (!res.ok) {
+    return data;
+  }
+
   return toGame(data);
 };
 
-export const playGame = async (id: string, guess: string) => {
+export const playGame = async (
+  id: string,
+  guess: string
+): Promise<Game | EndGame | err> => {
   const res = await fetch(`${apiURL}/play`, {
     method: "Post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id, guess }),
   });
   const data = await res.json();
+
+  if (!res.ok) {
+    return data;
+  }
+
   if (data.status) {
     return toEndGame(data);
   }

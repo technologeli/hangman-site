@@ -1,11 +1,12 @@
 import { Button, Space, TextInput } from "@mantine/core";
 import { useState } from "react";
-import { getGame } from "./lib/api";
+import { err, getGame } from "./lib/api";
 
-import { SetGameProps } from "./lib/game";
+import { Game, SetGameProps } from "./lib/game";
 
 function Join({ setGame }: SetGameProps) {
   const [id, setId] = useState("");
+  const [error, setError] = useState("");
   return (
     <>
       <TextInput
@@ -14,13 +15,20 @@ function Join({ setGame }: SetGameProps) {
         placeholder="ID"
         label="ID"
         variant="filled"
+        error={error}
         required
       />
       <Space h="md" />
       <Button
         disabled={!id}
         onClick={() => {
-          // getGame(id).then(g => setGame(g))
+          getGame(id).then((g) => {
+            if (g.hasOwnProperty("message")) {
+              setError((g as err).message);
+            } else {
+              setGame(g as Game);
+            }
+          });
         }}
       >
         Join Game

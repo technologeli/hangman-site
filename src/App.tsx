@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Create from "./create";
-import { EndGame, Game } from "./lib/game";
 import { Grid } from "@mantine/core";
 import Join from "./join";
+import { EndGame, Game } from "./lib/game";
 
 function App() {
-  const [game, setGame] = useState<Game | EndGame>();
+  const [game, setGame] = useState<Game | EndGame | undefined>();
   return (
     <>
-      {(!game || game.hasOwnProperty("answer")) && (
+      {(!game ||
+        game.hasOwnProperty("answer") ||
+        game.hasOwnProperty("message")) && (
         <Grid>
           <Grid.Col span={4}>
             <Create setGame={setGame} />
