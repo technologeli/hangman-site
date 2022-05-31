@@ -4,7 +4,7 @@ import { err, getGame } from "./lib/api";
 
 import { Game, SetGameProps } from "./lib/game";
 
-function Join({ setGame }: SetGameProps) {
+const Join = ({ setGame }: SetGameProps) => {
   const [id, setId] = useState("");
   const [error, setError] = useState("");
   return (
@@ -35,6 +35,6 @@ function Join({ setGame }: SetGameProps) {
       </Button>
     </>
   );
-}
+};
 
 export default Join;

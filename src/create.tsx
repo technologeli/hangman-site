@@ -4,7 +4,7 @@ import { useState } from "react";
 import { createGame } from "./lib/api";
 import { SetGameProps } from "./lib/game";
 
-function Create({ setGame }: SetGameProps) {
+const Create = ({ setGame }: SetGameProps) => {
   const [answer, setAnswer] = useState("");
   return (
     <>
@@ -27,6 +27,6 @@ function Create({ setGame }: SetGameProps) {
       </Button>
     </>
   );
-}
+};
 
 export default Create;

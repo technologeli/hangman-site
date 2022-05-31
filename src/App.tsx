@@ -3,14 +3,13 @@ import Create from "./create";
 import { Grid } from "@mantine/core";
 import Join from "./join";
 import { EndGame, Game } from "./lib/game";
+import Play from "./play";
 
-function App() {
+const App = () => {
   const [game, setGame] = useState<Game | EndGame | undefined>();
   return (
     <>
-      {(!game ||
-        game.hasOwnProperty("answer") ||
-        game.hasOwnProperty("message")) && (
+      {!game || game.hasOwnProperty("answer") ? (
         <Grid>
           <Grid.Col span={4}>
             <Create setGame={setGame} />
@@ -19,10 +18,14 @@ function App() {
             <Join setGame={setGame} />
           </Grid.Col>
         </Grid>
+      ) : (
+        <>
+          <Play game={game} setGame={setGame} />
+        </>
       )}
       <pre>{JSON.stringify(game, null, 4)}</pre>
     </>
   );
-}
+};
 
 export default App;
