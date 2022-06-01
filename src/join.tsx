@@ -11,7 +11,10 @@ const Join = ({ setGame }: SetGameProps) => {
     <>
       <TextInput
         value={id}
-        onChange={(e) => setId(e.currentTarget.value)}
+        onChange={(e) => {
+          setId(e.currentTarget.value);
+          setError("");
+        }}
         placeholder="ID"
         label="ID"
         variant="filled"

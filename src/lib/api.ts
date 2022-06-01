@@ -35,7 +35,7 @@ export const createGame = async (answer: string) => {
   return toGame(data);
 };
 
-export const getGame = async (id: string): Promise<Game | err> => {
+export const getGame = async (id: string): Promise<Game | EndGame | err> => {
   const res = await fetch(`${apiURL}/game/${id}`);
   const data = await res.json();
 
@@ -43,6 +43,9 @@ export const getGame = async (id: string): Promise<Game | err> => {
     return data;
   }
 
+  if (data.status) {
+    return toEndGame(data);
+  }
   return toGame(data);
 };
 
@@ -57,7 +60,7 @@ export const playGame = async (
   });
   const data = await res.json();
 
-  if (!res.ok) {
+  if (data.message) {
     return data;
   }
 
