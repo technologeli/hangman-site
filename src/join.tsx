@@ -16,10 +16,9 @@ const Join = ({ setGame }: SetGameProps) => {
           setError("");
         }}
         placeholder="ID"
-        label="ID"
+        aria-label="ID"
         variant="filled"
         error={error}
-        required
       />
       <Space h="md" />
       <Button
@@ -33,6 +32,7 @@ const Join = ({ setGame }: SetGameProps) => {
             }
           });
         }}
+        fullWidth
       >
         Join Game
       </Button>

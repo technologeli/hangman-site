@@ -12,12 +12,12 @@ const Create = ({ setGame }: SetGameProps) => {
         value={answer}
         onChange={(e) => setAnswer(e.currentTarget.value)}
         placeholder="Answer"
-        label="Answer"
         variant="filled"
-        required
+        aria-label="Answer"
       />
       <Space h="md" />
       <Button
+        fullWidth
         disabled={!answer}
         onClick={() => {
           createGame(answer).then((g) => setGame(g));
